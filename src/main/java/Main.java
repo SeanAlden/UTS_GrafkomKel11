@@ -36,12 +36,12 @@ public class Main {
     ArrayList<Vector3f> offsets = new ArrayList<>();
 
     //Animation
-    float Mov = 1;
-    float Mov2 = 1;
-    float Mov3 = 1;
-    float MovDeg = 0;
-    float MovDeg2 = 0;
-    float MovDeg3 = 0;
+    float MoveSatu = 1;
+    float MoveDua = 1;
+    float MoveTiga = 1;
+    float MoveDegSatu = 0;
+    float MoveDegDua = 0;
+    float MoveDegTiga = 0;
 
     float forwardDegX = 0f;
     float forwardDegZ = 90f;
@@ -983,6 +983,8 @@ public class Main {
 
     public void input() {
             if (window.isKeyPressed(GLFW_KEY_W)) {
+                //Fungsi tombol untuk merotasikan tanaman pada sumbu y "layar"
+
                 //Blover viewpoint (rotate according to screen's "y")
                 objectsBox.get(0).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
                 objectsBox.get(1).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
@@ -1003,6 +1005,9 @@ public class Main {
             }
 
             if (window.isKeyPressed(GLFW_KEY_Y)) {
+                //Fungsi tombol untuk merotasikan tanaman pada sumbu y "tanaman itu sendiri"
+
+                //Untuk update posisi tengah setiap tanaman
                 //Blover Objects
                 objectsBox.get(0).setExcludeRotate(true);
                 objectsBox.get(1).setExcludeRotate(true);
@@ -1031,149 +1036,85 @@ public class Main {
                 objectsBox.get(8).setExcludeRotate(false);
                 objectsCurve.get(2).setExcludeRotate(false);
 
-                Vector3f tempCenterPoint = objectsBox.get(0).updateCenterPoint();
-                Vector3f tempCenterPoint2 = objectsBox.get(1).updateCenterPoint();
-                Vector3f tempCenterPoint3 = objectsBox.get(2).updateCenterPoint();
-                Vector3f tempCenterPoint4 = objectsBox.get(3).updateCenterPoint();
-                Vector3f tempCenterPoint5 = objectsBox.get(4).updateCenterPoint();
-                Vector3f tempCenterPoint6 = objectsBox.get(5).updateCenterPoint();
-                Vector3f tempCenterPoint7 = objectsBox.get(6).updateCenterPoint();
-                Vector3f tempCenterPoint8 = objectsCurve.get(0).updateCenterPoint();
-                Vector3f tempCenterPoint9 = objectsBox.get(8).updateCenterPoint();
-                Vector3f tempCenterPoint10 = objectsCurve.get(2).updateCenterPoint();
+                //Fungsi update posisi ketengahan setiap objek baik parent dan childnya
+                Vector3f Objek1 = objectsBox.get(0).updateCenterPoint();
+                Vector3f Objek2 = objectsBox.get(1).updateCenterPoint();
+                Vector3f Objek3 = objectsBox.get(2).updateCenterPoint();
+                Vector3f Objek4 = objectsBox.get(3).updateCenterPoint();
+                Vector3f Objek5 = objectsBox.get(4).updateCenterPoint();
+                Vector3f Objek6 = objectsBox.get(5).updateCenterPoint();
+                Vector3f Objek7 = objectsBox.get(6).updateCenterPoint();
+                Vector3f Objek8 = objectsCurve.get(0).updateCenterPoint();
+                Vector3f objek9 = objectsBox.get(8).updateCenterPoint();
+                Vector3f Objek10 = objectsCurve.get(2).updateCenterPoint();
+
+                //Dibawah ini adalah fungsi yang digunakan untuk mengatur ketengahan dari objek yang dipilih
+                //dengan mengatur translasinya agar bisa tepat setiap tanaman mau rotasi di titik yang mereka tempati
 
                 //Blover animation (blover rotation to it's "y")
-                objectsBox.get(0).translateObject(
-                        tempCenterPoint.x * -1,
-                        tempCenterPoint.y * -1,
-                        tempCenterPoint.z * -1);
-                objectsBox.get(0).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(0).translateObject(
-                        tempCenterPoint.x * +1,
-                        tempCenterPoint.y * +1,
-                        tempCenterPoint.z * +1);
+                objectsBox.get(0).translateObject(Objek1.x * -1, Objek1.y * -1, Objek1.z * -1);
+                objectsBox.get(0).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(0).translateObject(Objek1.x * +1, Objek1.y * +1, Objek1.z * +1);
 
-                objectsBox.get(1).translateObject(
-                        tempCenterPoint2.x * -1,
-                        tempCenterPoint2.y * -1,
-                        tempCenterPoint2.z * -1);
-                objectsBox.get(1).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(1).translateObject(
-                        tempCenterPoint2.x * +1,
-                        tempCenterPoint2.y * +1,
-                        tempCenterPoint2.z * +1);
+                objectsBox.get(1).translateObject(Objek2.x * -1, Objek2.y * -1, Objek2.z * -1);
+                objectsBox.get(1).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(1).translateObject(Objek2.x * +1, Objek2.y * +1, Objek2.z * +1);
 
-                objectsBox.get(2).translateObject(
-                        tempCenterPoint3.x * -1,
-                        tempCenterPoint3.y * -1,
-                        tempCenterPoint3.z * -1);
-                objectsBox.get(2).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(2).translateObject(
-                        tempCenterPoint3.x * +1,
-                        tempCenterPoint3.y * +1,
-                        tempCenterPoint3.z * +1);
+                objectsBox.get(2).translateObject(Objek3.x * -1, Objek3.y * -1, Objek3.z * -1);
+                objectsBox.get(2).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(2).translateObject(Objek3.x * +1, Objek3.y * +1, Objek3.z * +1);
 
-                objectsBox.get(3).translateObject(
-                        tempCenterPoint4.x * -1,
-                        tempCenterPoint4.y * -1,
-                        tempCenterPoint4.z * -1);
-                objectsBox.get(3).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(3).translateObject(
-                        tempCenterPoint4.x * +1,
-                        tempCenterPoint4.y * +1,
-                        tempCenterPoint4.z * +1);
+                objectsBox.get(3).translateObject(Objek4.x * -1, Objek4.y * -1, Objek4.z * -1);
+                objectsBox.get(3).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(3).translateObject(Objek4.x * +1, Objek4.y * +1, Objek4.z * +1);
 
-                objectsBox.get(4).translateObject(
-                        tempCenterPoint5.x * -1,
-                        tempCenterPoint5.y * -1,
-                        tempCenterPoint5.z * -1);
-                objectsBox.get(4).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(4).translateObject(
-                        tempCenterPoint5.x * +1,
-                        tempCenterPoint5.y * +1,
-                        tempCenterPoint5.z * +1);
+                objectsBox.get(4).translateObject(Objek5.x * -1, Objek5.y * -1, Objek5.z * -1);
+                objectsBox.get(4).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(4).translateObject(Objek5.x * +1, Objek5.y * +1, Objek5.z * +1);
 
-                objectsBox.get(5).translateObject(
-                        tempCenterPoint6.x * -1,
-                        tempCenterPoint6.y * -1,
-                        tempCenterPoint6.z * -1);
-                objectsBox.get(5).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(5).translateObject(
-                        tempCenterPoint6.x * +1,
-                        tempCenterPoint6.y * +1,
-                        tempCenterPoint6.z * +1);
+                objectsBox.get(5).translateObject(Objek6.x * -1, Objek6.y * -1, Objek6.z * -1);
+                objectsBox.get(5).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(5).translateObject(Objek6.x * +1, Objek6.y * +1, Objek6.z * +1);
 
-                objectsBox.get(6).translateObject(
-                        tempCenterPoint7.x * -1,
-                        tempCenterPoint7.y * -1,
-                        tempCenterPoint7.z * -1);
-                objectsBox.get(6).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(6).translateObject(
-                        tempCenterPoint7.x * +1,
-                        tempCenterPoint7.y * +1,
-                        tempCenterPoint7.z * +1);
+                objectsBox.get(6).translateObject(Objek7.x * -1, Objek7.y * -1, Objek7.z * -1);
+                objectsBox.get(6).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(6).translateObject(Objek7.x * +1, Objek7.y * +1, Objek7.z * +1);
 
-                objectsCurve.get(0).translateObject(
-                        tempCenterPoint8.x * -1,
-                        tempCenterPoint8.y * -1,
-                        tempCenterPoint8.z * -1);
-                objectsCurve.get(0).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsCurve.get(0).translateObject(
-                        tempCenterPoint8.x * +1,
-                        tempCenterPoint8.y * +1,
-                        tempCenterPoint8.z * +1);
+                objectsCurve.get(0).translateObject(Objek8.x * -1, Objek8.y * -1, Objek8.z * -1);
+                objectsCurve.get(0).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsCurve.get(0).translateObject(Objek8.x * +1, Objek8.y * +1, Objek8.z * +1);
 
                 //Potato-mine animation (Potato-mine rotation to it's "y")
-                objectsBox.get(7).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsCurve.get(1).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(7).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsCurve.get(1).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
 
                 //Sun-shroom animation (Sun-shroom rotation to it's "y")
-                objectsBox.get(8).translateObject(
-                        tempCenterPoint9.x * -1,
-                        tempCenterPoint9.y * -1,
-                        tempCenterPoint9.z * -1);
-                objectsBox.get(8).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsBox.get(8).translateObject(
-                        tempCenterPoint9.x * +1,
-                        tempCenterPoint9.y * +1,
-                        tempCenterPoint9.z * +1);
+                objectsBox.get(8).translateObject(objek9.x * -1, objek9.y * -1, objek9.z * -1);
+                objectsBox.get(8).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsBox.get(8).translateObject(objek9.x * +1, objek9.y * +1, objek9.z * +1);
 
-                objectsCurve.get(2).translateObject(
-                        tempCenterPoint10.x * -1,
-                        tempCenterPoint10.y * -1,
-                        tempCenterPoint10.z * -1);
-                objectsCurve.get(2).rotateObject(
-                        (float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
-                objectsCurve.get(2).translateObject(
-                        tempCenterPoint10.x * +1,
-                        tempCenterPoint10.y * +1,
-                        tempCenterPoint10.z * +1);
+                objectsCurve.get(2).translateObject(Objek10.x * -1, Objek10.y * -1, Objek10.z * -1);
+                objectsCurve.get(2).rotateObject((float) Math.toRadians(1f), 0.0f, 1.0f, 0.0f);
+                objectsCurve.get(2).translateObject(Objek10.x * +1, Objek10.y * +1, Objek10.z * +1);
             }
 
             if (window.isKeyPressed(GLFW_KEY_F)) {
+                //Fungsi tombol untuk menjalankan animasi setiap tanaman
+
                 //Potato mine animation (lamp color)
-                AnimateStopAnytime();
+                LampAnimation();
 
                 //Sun-Shroom animation (jamur bergoyang ke samping)
-                AnimateStopAnytime2();
+                ShroomAnimation1();
 
                 //Blover animation (baling-baling berputar)
-                AnimateStopAnytime4();
+                BloverAnimation();
             }
             if (window.isKeyPressed(GLFW_KEY_J)){
+                //Fungsi tombol tambahan untuk animasi lompat pada jamur
+
                 //Sun-Shroom animation (jamur bergerak ke atas/bawah)
-                AnimateStopAnytime3();
+                ShroomAnimation2();
             }
 
         if (window.getMouseInput().isLeftButtonReleased()) {
@@ -1209,24 +1150,24 @@ public class Main {
 
     //Animation
     //Potato-Mine Lamp Animation
-    private void AnimateStopAnytime() {
-        if (MovDeg >= 0.1) {
-            Mov = -1;
+    private void LampAnimation() {
+        if (MoveDegSatu >= 0.1) {
+            MoveSatu = -1;
         }
-        if (MovDeg <= -0.1) {
-            Mov = 1;
+        if (MoveDegSatu <= -0.1) {
+            MoveSatu = 1;
         }
 
-        objectsBox.get(7).getChildObject().get(7).translateObject(0.0f, -MovDeg, 0.0f);
-        MovDeg += Mov;
+        objectsBox.get(7).getChildObject().get(7).translateObject(0.0f, -MoveDegSatu, 0.0f);
+        MoveDegSatu += MoveSatu;
 
     }
-        private void AnimateStopAnytime2() {
-            if (MovDeg2 >= 45f) {
-                Mov2 = -1f;
+        private void ShroomAnimation1() {
+            if (MoveDegDua >= 45f) {
+                MoveDua = -1f;
             }
-            if (MovDeg2 <= -45f) {
-                Mov2 = 1f;
+            if (MoveDegDua <= -45f) {
+                MoveDua = 1f;
             }
 
             //Sun-Shroom menggerakkan badan ke samping
@@ -1235,44 +1176,28 @@ public class Main {
             objectsCurve.get(2).setExcludeRotate(true);
             objectsCurve.get(2).setExcludeRotate(false);
 
-            Vector3f tempCenterPoint = objectsBox.get(8).updateCenterPoint();
-            Vector3f tempCenterPoint2 = objectsCurve.get(2).updateCenterPoint();
+            Vector3f tengah1 = objectsBox.get(8).updateCenterPoint();
+            Vector3f tengah2 = objectsCurve.get(2).updateCenterPoint();
 
-            objectsBox.get(8).translateObject(
-                    tempCenterPoint.x * -1,
-                    tempCenterPoint.y * -1,
-                    tempCenterPoint.z * -1);
-            //
-            objectsBox.get(8).rotateObject((float) Math.toRadians(Mov2 * 0.6), 0.0f, 0.0f, -1.0f);
-            objectsBox.get(8).translateObject(
-                    tempCenterPoint.x * +1,
-                    tempCenterPoint.y * +1,
-                    tempCenterPoint.z * +1);
+            objectsBox.get(8).translateObject(tengah1.x * -1, tengah1.y * -1, tengah1.z * -1);
+            objectsBox.get(8).rotateObject((float) Math.toRadians(MoveDua * 0.6), 0.0f, 0.0f, -1.0f);
+            objectsBox.get(8).translateObject(tengah1.x * +1, tengah1.y * +1, tengah1.z * +1);
 
-            objectsCurve.get(2).translateObject(
-                    tempCenterPoint2.x * -1,
-                    tempCenterPoint2.y * -1,
-                    tempCenterPoint2.z * -1);
-            //
-            objectsCurve.get(2).rotateObject((float) Math.toRadians(Mov2 * 0.6), 0.0f, 0.0f, -1.0f);
-            objectsCurve.get(2).translateObject(
-                    tempCenterPoint2.x * +1,
-                    tempCenterPoint2.y * +1,
-                    tempCenterPoint2.z * +1);
-
-            //Menggerakkan badan ke samping
+            objectsCurve.get(2).translateObject(tengah2.x * -1, tengah2.y * -1, tengah2.z * -1);
+            objectsCurve.get(2).rotateObject((float) Math.toRadians(MoveDua * 0.6), 0.0f, 0.0f, -1.0f);
+            objectsCurve.get(2).translateObject(tengah2.x * +1, tengah2.y * +1, tengah2.z * +1);
 
             //Supaya geraknya bener
-            MovDeg2 += Mov2;
+            MoveDegDua += MoveDua;
         }
 
 
-        private void AnimateStopAnytime3() {
-                if (MovDeg3 >= 0.1f) {
-                    Mov3 = -1f;
+        private void ShroomAnimation2() {
+                if (MoveDegTiga >= 0.1f) {
+                    MoveTiga = -1f;
                 }
-                if (MovDeg3 <= -0.1f) {
-                    Mov3 = 1f;
+                if (MoveDegTiga <= -0.1f) {
+                    MoveTiga = 1f;
                 }
                 //Sun-Shroom menggerakkan badan ke atas/bawah
                 objectsBox.get(8).setExcludeRotate(true);
@@ -1280,62 +1205,39 @@ public class Main {
                 objectsCurve.get(2).setExcludeRotate(true);
                 objectsCurve.get(2).setExcludeRotate(false);
 
-                Vector3f tempCenterPoint = objectsBox.get(7).updateCenterPoint();
-                Vector3f tempCenterPoint2 = objectsCurve.get(2).updateCenterPoint();
+                Vector3f tengah1 = objectsBox.get(7).updateCenterPoint();
+                Vector3f tengah2 = objectsCurve.get(2).updateCenterPoint();
 
-                objectsBox.get(8).translateObject(
-                    tempCenterPoint.x * -1,
-                    tempCenterPoint.y * -1,
-                    tempCenterPoint.z * -1);
-                //
-                objectsBox.get(8).translateObject(0.0f, MovDeg3, 0.0f);
-                objectsBox.get(8).translateObject(
-                    tempCenterPoint.x * +1,
-                    tempCenterPoint.y * +1,
-                    tempCenterPoint.z * +1);
+                objectsBox.get(8).translateObject(tengah1.x * -1, tengah1.y * -1, tengah1.z * -1);
+                objectsBox.get(8).translateObject(0.0f, MoveDegTiga, 0.0f);
+                objectsBox.get(8).translateObject(tengah1.x * +1, tengah1.y * +1, tengah1.z * +1);
 
-            objectsCurve.get(2).translateObject(
-                    tempCenterPoint2.x * -1,
-                    tempCenterPoint2.y * -1,
-                    tempCenterPoint2.z * -1);
-            //
-            objectsCurve.get(2).translateObject(0.0f, MovDeg3, 0.0f);
-            objectsCurve.get(2).translateObject(
-                    tempCenterPoint2.x * +1,
-                    tempCenterPoint2.y * +1,
-                    tempCenterPoint2.z * +1);
+                objectsCurve.get(2).translateObject(tengah2.x * -1, tengah2.y * -1, tengah2.z * -1);
+                objectsCurve.get(2).translateObject(0.0f, MoveDegTiga, 0.0f);
+                objectsCurve.get(2).translateObject(tengah2.x * +1, tengah2.y * +1, tengah2.z * +1);
 
                 //Supaya geraknya benar
-                MovDeg3 += Mov3;
+                MoveDegTiga += MoveTiga;
             }
-            private void AnimateStopAnytime4(){
+            private void BloverAnimation(){
 
                 objectsBox.get(0).setExcludeRotate(true);
 
-                Vector3f tempCenterPoint = objectsBox.get(0).updateCenterPoint();
+                Vector3f posisi = objectsBox.get(0).updateCenterPoint();
 
-                objectsBox.get(0).translateObject(
-                        tempCenterPoint.x * -1,
-                        tempCenterPoint.y * -1,
-                        tempCenterPoint.z * -1);
+                objectsBox.get(0).translateObject(posisi.x * -1, posisi.y * -1, posisi.z * -1);
+
                 //Blover animation (blover's leafs spinning)
 
                 //Animasi untuk memutar baling-baling ketika blover menghadap layar
-                objectsBox.get(0).rotateObject(
-                        -(float) Math.toRadians(20.0f), 0.0f, 0.0f, 1.0f);
+                objectsBox.get(0).rotateObject(-(float) Math.toRadians(20.0f), 0.0f, 0.0f, 1.0f);
                 //Animasi untuk memutar baling-baling ketika blover menghadap pada "kanan" layar
-//                objectsBox.get(0).rotateObject(
-//                        -(float) Math.toRadians(20.0f), 1.0f, 0.0f, 0.0f);
+//                objectsBox.get(0).rotateObject(-(float) Math.toRadians(20.0f), 1.0f, 0.0f, 0.0f);
                 //Animasi untuk memutar baling-baling ketika blover membelakangi layar
-//                objectsBox.get(0).rotateObject(
-//                          (float) Math.toRadians(20.0f), 0.0f, 0.0f, 1.0f);
+//                objectsBox.get(0).rotateObject((float) Math.toRadians(20.0f), 0.0f, 0.0f, 1.0f);
                 //Animasi untuk memutar baling-baling ketika blover menghadap pada "kiri" layar
-//                objectsBox.get(0).rotateObject(
-//                          (float) Math.toRadians(20.0f), 1.0f, 0.0f, 0.0f);
-                objectsBox.get(0).translateObject(
-                        tempCenterPoint.x * +1,
-                        tempCenterPoint.y * +1,
-                        tempCenterPoint.z * +1);
+//                objectsBox.get(0).rotateObject((float) Math.toRadians(20.0f), 1.0f, 0.0f, 0.0f);
+                objectsBox.get(0).translateObject(posisi.x * +1, posisi.y * +1, posisi.z * +1);
 
                 objectsBox.get(0).setExcludeRotate(false);
             }
@@ -1350,8 +1252,6 @@ public class Main {
                     0.0f);
             GL.createCapabilities();
             input();
-
-            //code no color
 
 //            for (Object2d object : objectsControl) {
 //                object.drawLine();
